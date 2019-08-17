@@ -122,7 +122,7 @@ class BeoPlay(object):
             self.media_artist = data["notification"]["data"]["name"]
             if data["notification"]["data"]["image"]:
                 self.media_url = data["notification"]["data"]["image"][0]["url"]
-            if data["notification"]["data"]["liveDescription"]:
+            if 'liveDescription' in data["notification"]["data"]:
                 self.media_track = data["notification"]["data"]["liveDescription"]
 
     ###############################################################
