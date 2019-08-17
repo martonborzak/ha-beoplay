@@ -95,7 +95,7 @@ class BeoPlay(object):
                 i = 0
                 while i < len(r[elements]):
                     self.sources.append(r[elements][i][1]["friendlyName"])
-                    self.sourcesID.append(r[elements][i][1]["id"])
+                    self.sourcesID.append(r[elements][i][0])
                     i += 1
 
     def getState(self, data):
