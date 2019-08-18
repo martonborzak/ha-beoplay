@@ -8,7 +8,7 @@ TIMEOUT = 5.0
 CONNFAILCOUNT = 5
 
 class BeoPlay(object):
-    def __init__(self, host):
+    def __init__(self, host, type='default'):
         self._host = host
         self._host_notifications = BASE_URL.format(self._host, 'BeoNotify/Notifications')
         self._name = None
