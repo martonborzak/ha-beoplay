@@ -8,7 +8,7 @@ TIMEOUT = 5.0
 CONNFAILCOUNT = 5
 
 class BeoPlay(object):
-    def __init__(self, host):
+    def __init__(self, host, type='default'):
         self._host = host
         self._host_notifications = BASE_URL.format(self._host, 'BeoNotify/Notifications')
         self._name = None
@@ -95,7 +95,7 @@ class BeoPlay(object):
                 i = 0
                 while i < len(r[elements]):
                     self.sources.append(r[elements][i][1]["friendlyName"])
-                    self.sourcesID.append(r[elements][i][1]["id"])
+                    self.sourcesID.append(r[elements][i][0])
                     i += 1
 
     def getState(self, data):
@@ -122,7 +122,7 @@ class BeoPlay(object):
             self.media_artist = data["notification"]["data"]["name"]
             if data["notification"]["data"]["image"]:
                 self.media_url = data["notification"]["data"]["image"][0]["url"]
-            if data["notification"]["data"]["liveDescription"]:
+            if 'liveDescription' in data["notification"]["data"]:
                 self.media_track = data["notification"]["data"]["liveDescription"]
 
     ###############################################################
