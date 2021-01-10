@@ -27,6 +27,9 @@ class BeoPlay(object):
         self.media_artist = None
         self.media_album = None
         self.primary_experience = None
+        self._serialNumber = None
+        self._typeNumber = None
+        self._itemNumber = None
 
     def _getReq(self, path):
         try:
@@ -124,6 +127,14 @@ class BeoPlay(object):
                 self.media_url = data["notification"]["data"]["image"][0]["url"]
             if 'liveDescription' in data["notification"]["data"]:
                 self.media_track = data["notification"]["data"]["liveDescription"]
+    
+    def getDeviceInfo(self):
+        r = self._speaker._getReq("BeoDevice")
+        if r:
+            self._serialNumber = r["beoDevice"]["productId"]["serialNumber"]
+            self._name = r["beoDevice"]["productFriendlyName"]["productFriendlyName"]
+            self._typeNumber = r["beoDevice"]["productId"]["typeNumber"]
+            self._itemNumber = r["beoDevice"]["productId"]["itemNumber"]
 
     ###############################################################
     # COMMANDS
