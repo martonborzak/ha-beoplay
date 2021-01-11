@@ -87,15 +87,19 @@ class BeoPlay(object):
         if data["notification"]["type"] == "SOURCE":
             self.primary_experience = data["primary"]
 
-    
+# edited to only include in Use sources    
     def getSources(self):
         r = self._getReq('BeoZone/Zone/Sources')
         if r:
             for elements in r:
                 i = 0
                 while i < len(r[elements]):
-                    self.sources.append(r[elements][i][1]["friendlyName"])
-                    self.sourcesID.append(r[elements][i][0])
+                    if r[elements][i][1]["inUse"] == True:
+                        if r[elements][i][1]["borrowed"] == True:
+                            self.sources.append("\U0001F517 " + r[elements][i][1]["friendlyName"])
+                        else:
+                            self.sources.append(r[elements][i][1]["friendlyName"])
+                        self.sourcesID.append(r[elements][i][0])
                     i += 1
 
     def getState(self, data):
