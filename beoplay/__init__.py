@@ -133,7 +133,7 @@ class BeoPlay(object):
                 self.media_track = data["notification"]["data"]["liveDescription"]
     
     def getDeviceInfo(self):
-        r = self._speaker._getReq("BeoDevice")
+        r = self._getReq("BeoDevice")
         if r:
             self._serialNumber = r["beoDevice"]["productId"]["serialNumber"]
             self._name = r["beoDevice"]["productFriendlyName"]["productFriendlyName"]
